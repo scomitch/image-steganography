@@ -1,3 +1,5 @@
+import LSBHide
+
 print("Welcome to the Data Smuggling application!")
 
 while True:
@@ -8,7 +10,8 @@ while True:
     choice = input(":- ")
 
     if choice == 1:
-        break
+        message = input("Please enter the string you wish to smuggle:\n:- ")
+        LSBHide.smuggle_string(message)
     elif choice == 2:
         break
     else:
