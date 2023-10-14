@@ -1,8 +1,15 @@
+import os
+
 from PIL import Image
+
+import LSBExtract
+import LSBHide
 
 print("Welcome to the Data Smuggling application!")
 
-while True:
+
+def menu():
+    print("Welcome to the Data Smuggling application!")
     print("Please Choose from the following:"
           "\n1: Hide a String in the image"
           "\n2: Extract a hidden string from an image"
@@ -11,17 +18,38 @@ while True:
     choice = input(":- ")
 
     if choice == 1:
-        break
+        message = input("Please enter the string you wish to smuggle:\n:- ")
+        LSBHide.smuggle_string(message)
     elif choice == 2:
-        break
-    elif choice == 3:
-        break
+        LSBExtract.extract_message(list_images())
     else:
         print("Your choice was invalid, please try again")
 
 
-def check_constraints(image_path, string_to_hide):
+def list_images():
+    all_images = [f for f in os.listdir('resources/out') if os.path.isfile((os.path.join('resources/out'), f))]
 
+    if not all_images:
+        print("There are no images with smuggled data currently stored.")
+        return None
+
+    for index, filename in enumerate(all_images, 1):
+        print(f"{index + 1}: {filename}")
+
+    while True:
+        try:
+            img_choice = int(input("Please choose from the above options: "))
+            if 1 <= img_choice <= len(all_images):
+                selected_image = all_images[img_choice - 1]
+                print(f"Selected Image: {selected_image}")
+                return os.path.join('resources/out/', selected_image)
+            else:
+                print("Invalid Selection. Please try again.")
+        except:
+            print("Please enter a numerical option as listed.")
+
+
+def check_constraints(image_path, string_to_hide):
     # Open up the cover image using pillow
     cover_image = Image.open(image_path)
 
