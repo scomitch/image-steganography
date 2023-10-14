@@ -1,0 +1,8 @@
+1. Fix file listing for string extraction
+2. Dynamic image display/extraction
+3. Output file naming system (numerical)
+4. Max 10 files in output folder
+5. Code cleanups/Comment everything
+6. Unit Tests
+   6a. Successful smuggle and extract
+   6b. String too large for image
