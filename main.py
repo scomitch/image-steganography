@@ -4,13 +4,15 @@ from PIL import Image
 
 import LSBExtract
 import LSBHide
+import image_show
 
 
 def menu():
     print("Welcome to the Data Smuggling application!")
     print("Please Choose from the following:"
           "\n1: Hide a String in the image"
-          "\n2: Extract a hidden string from an image")
+          "\n2: Extract a hidden string from an image"
+          "\n3: Show original & altered image")
 
     choice = input(":- ")
 
@@ -19,6 +21,8 @@ def menu():
         LSBHide.smuggle_string(message)
     elif int(choice) == 2:
         LSBExtract.extract_message(list_images())
+    elif int(choice) == 3:
+        image_show
     else:
         print("Your choice was invalid, please try again")
 
