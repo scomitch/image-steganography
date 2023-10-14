@@ -20,7 +20,7 @@ def menu():
         message = input("Please enter the string you wish to smuggle:\n:- ")
         LSBHide.smuggle_string(message)
     elif int(choice) == 2:
-        LSBExtract.extract_message(list_images())
+        list_images()
     elif int(choice) == 3:
         image_show
     else:
@@ -43,7 +43,7 @@ def list_images():
             if 1 <= img_choice <= len(all_images):
                 selected_image = all_images[img_choice - 1]
                 print(f"Selected Image: {selected_image}")
-                return os.path.join('resources/out/', selected_image)
+                LSBExtract.extract_message(os.path.join('resources/out/', selected_image))
             else:
                 print("Invalid Selection. Please try again.")
         except:
