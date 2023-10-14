@@ -47,28 +47,28 @@ def smuggle_string(message):
 def check_constraints(image_path, string_to_hide):
 
     # Open up the cover image using pillow
-    cover_image = Image.open(image_path)
+    cover = Image.open(image_path)
 
     # Make sure the cover image is a .bmp
-    print(cover_image.format)
-    if cover_image.format != "BMP":
+    print('You have passed in an image with the format: ' + cover.format)
+    if cover.format != "BMP":
         return False
 
     # Make sure the image is full RGB, i.e. 24 bit color mapping
-    print(cover_image.mode)
-    if cover_image.mode != "RGB":
+    print('You have passed in an image with the color mapping ' + cover.mode)
+    if cover.mode != "RGB":
         return False
 
     # Get the width, height of the image, multiply by 3 to get total bytes.
-    w, h = cover_image.size
+    w, h = cover.size
 
     # Number of bytes available, minus 54 bytes for metadata and
     image_bytes_allocated = ((w * h * 3) - 54) // 8
-    print(image_bytes_allocated)
+    print('The number of bytes allocated to hiding is: ' + str(image_bytes_allocated))
 
     # Get the number of bytes in a string
     string_bytes = len(string_to_hide)
-    print(string_bytes)
+    print('The number of bytes of hidden message is: ' + str(string_bytes))
     if string_bytes >= image_bytes_allocated:
         return False
 
