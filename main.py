@@ -1,10 +1,5 @@
-import os
-
-from PIL import Image
-
 import LSBExtract
 import LSBHide
-import image_show
 
 
 def menu():
