@@ -9,11 +9,12 @@ import LSBHide
 # LSBHide (Hides a string into the cover image)
 # List Images (Lists all images in the out folder, giving an option to choose which one to pull a message from)
 def menu():
-    print("Main Menu - Please Choose from the following:"
-          "\n1: Hide a String in the image"
-          "\n2: Extract a hidden string from an image"
-          "\n3: Show original & altered image"
-          "\n4: Quit")
+    while True:
+        print("Main Menu - Please Choose from the following:"
+              "\n1: Hide a String in the image"
+              "\n2: Extract a hidden string from an image"
+              "\n3: Show original & altered image"
+              "\n4: Quit")
 
         choice = input(":- ")
 
