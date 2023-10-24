@@ -1,3 +1,6 @@
+import os
+import re
+
 from PIL import Image
 import sys
 
@@ -59,7 +62,8 @@ def smuggle_string(message):
 
         # Set the data.
         img.putdata(new_pixels)
-        img.save('resources/out/out.bmp')
+        img_string = 'resources/out/out-' + str(check_output_number('resources/out')) + '.bmp'
+        img.save(img_string)
 
 
 # Checks for predefined constraints and ensures the cover image passes checks.
@@ -91,3 +95,24 @@ def check_constraints(image_path, string_to_hide):
         return False
 
     return True
+
+def check_output_number(file_path):
+    files = [f for f in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, f))]
+    numbers = []
+    for fi in files:
+        match = re.search(r'(\d+)(?:\.\w+)?$', fi)
+        if match:
+            numbers.append(int(match.group(1)))
+
+    if len(numbers) == 5:
+        file_to_delete = min(numbers)
+        remove_string = file_path + '/out-' + str(file_to_delete) + '.bmp'
+        os.remove(os.path.join(remove_string))
+        print(f"Deleted output file: ", remove_string)
+
+    if numbers:
+        next_number = max(numbers) + 1
+    else:
+        next_number = 1
+
+    return next_number

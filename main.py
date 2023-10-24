@@ -1,3 +1,4 @@
+import os
 import sys
 
 import LSBExtract
@@ -8,13 +9,11 @@ import LSBHide
 # LSBHide (Hides a string into the cover image)
 # List Images (Lists all images in the out folder, giving an option to choose which one to pull a message from)
 def menu():
-    while True:
-        print("Welcome to the Data Smuggling application!")
-        print("Please Choose from the following:"
-              "\n1: Hide a String in the image"
-              "\n2: Extract a hidden string from an image"
-              "\n3: Show original & altered image"
-              "\n4: Exit")
+    print("Main Menu - Please Choose from the following:"
+          "\n1: Hide a String in the image"
+          "\n2: Extract a hidden string from an image"
+          "\n3: Show original & altered image"
+          "\n4: Quit")
 
         choice = input(":- ")
 
@@ -38,31 +37,36 @@ def menu():
 
 
 def list_images():
+    all_images = [f for f in os.listdir('resources/out') if os.path.isfile(os.path.join('resources/out', f))]
 
-    print(LSBExtract.extract_message('resources/out/out.bmp'))
+    if not all_images:
+        print("There are no images with smuggled data currently stored.")
+        return None
 
+    all_images.sort()
 
-    # all_images = [f for f in os.listdir('resources/out') if os.path.isfile((os.path.join('resources/out'), f))]
-    #
-    # if not all_images:
-    #     print("There are no images with smuggled data currently stored.")
-    #     return None
-    #
-    # for index, filename in enumerate(all_images, 1):
-    #     print(f"{index + 1}: {filename}")
-    #
-    # while True:
-    #     try:
-    #         img_choice = int(input("Please choose from the above options: "))
-    #         if 1 <= img_choice <= len(all_images):
-    #             selected_image = all_images[img_choice - 1]
-    #             print(f"Selected Image: {selected_image}")
-    #             LSBExtract.extract_message(os.path.join('resources/out/', selected_image))
-    #         else:
-    #             print("Invalid Selection. Please try again.")
-    #     except:
-    #         print("Please enter a numerical option as listed.")
+    for index, filename in enumerate(all_images, 1):
+        print(f"{index}: {filename}")
+
+    while True:
+        try:
+            img_choice = int(input("Please choose from the above options: "))
+            if 1 <= img_choice <= len(all_images):
+                selected_image = all_images[img_choice - 1]
+                print(f"Selected Image: {selected_image}")
+                print(LSBExtract.extract_message(os.path.join('resources/out/', selected_image)))
+                break
+            else:
+                print("Invalid Selection. Please try again.")
+        except:
+            print("\nPlease enter a numerical option as listed.")
+
+    menu()
 
 
 if __name__ == "__main__":
-    menu()
+    try:
+        print("Welcome to the Data Smuggling application!")
+        menu()
+    except KeyboardInterrupt:
+        print("\n\nGoodbye!")
