@@ -3,32 +3,38 @@ import sys
 
 import LSBExtract
 import LSBHide
-# import image_show
 
 
+# Menu function, prompts the user for entering LSB information.
+# LSBHide (Hides a string into the cover image)
+# List Images (Lists all images in the out folder, giving an option to choose which one to pull a message from)
 def menu():
-    print("Main Menu - Please Choose from the following:"
-          "\n1: Hide a String in the image"
-          "\n2: Extract a hidden string from an image"
-          "\n3: Show original & altered image"
-          "\n4: Quit")
+    while True:
+        print("Main Menu - Please Choose from the following:"
+              "\n1: Hide a String in the image"
+              "\n2: Extract a hidden string from an image"
+              "\n3: Show original & altered image"
+              "\n4: Quit")
 
-    choice = input(":- ")
+        choice = input(":- ")
 
-    if int(choice) == 1:
-        message = input("Please enter the string you wish to smuggle:\n:- ")
-        LSBHide.smuggle_string(message)
-        menu()
-    elif int(choice) == 2:
-        list_images()
-    elif int(choice) == 3:
-        print("todo")
-        # image_show
-    elif int(choice) == 4:
-        print("\n\nGoodbye!")
-        sys.exit()
-    else:
-        print("Your choice was invalid, please try again")
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("\n! Error: Please enter a valid number between 1 and 4 !\n")
+
+        if choice == 1:
+            message = input("Please enter the string you wish to smuggle:\n:- ")
+            LSBHide.smuggle_string(message)
+        elif choice == 2:
+            list_images()
+        elif choice == 3:
+            print("todo")
+            # image_show
+        elif choice == 4:
+            sys.exit(1)
+        else:
+            print("Your choice was invalid, please try again")
 
 
 def list_images():
