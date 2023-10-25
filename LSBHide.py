@@ -2,6 +2,7 @@ import os
 import re
 
 from PIL import Image
+from image_show import show_horizontal
 import sys
 
 cover_image = 'resources/parrots.bmp'
@@ -62,8 +63,18 @@ def smuggle_string(message):
 
         # Set the data.
         img.putdata(new_pixels)
-        img_string = 'resources/out/out-' + str(check_output_number('resources/out')) + '.bmp'
+        out_number = str(check_output_number('resources/out'))
+        img_string = 'resources/out/out-' + out_number + '.bmp'
         img.save(img_string)
+
+        print("Enter 'y' if you would like to see a comparison of the cover image and newly generate image. Else press enter")
+        choice = input(":- ")
+        if choice == 'y':
+            # Display image.
+            show_horizontal(img_string, message, out_number, True)
+        else:
+            show_horizontal(img_string, message, out_number, False)
+
 
 
 # Checks for predefined constraints and ensures the cover image passes checks.
@@ -95,6 +106,7 @@ def check_constraints(image_path, string_to_hide):
         return False
 
     return True
+
 
 def check_output_number(file_path):
     files = [f for f in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, f))]
