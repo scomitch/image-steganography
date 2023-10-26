@@ -2,7 +2,7 @@ import os
 import re
 
 from PIL import Image
-from image_show import show_horizontal
+from ImageShow import show_horizontal
 import sys
 
 cover_image = 'resources/parrots.bmp'
