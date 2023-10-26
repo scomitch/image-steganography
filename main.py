@@ -13,8 +13,7 @@ def menu():
         print("Main Menu - Please Choose from the following:"
               "\n1: Hide a String in the image"
               "\n2: Extract a hidden string from an image"
-              "\n3: Show original & altered image"
-              "\n4: Quit")
+              "\n3: Quit")
 
         choice = input(":- ")
 
@@ -29,9 +28,6 @@ def menu():
         elif choice == 2:
             list_images()
         elif choice == 3:
-            print("todo")
-            # image_show
-        elif choice == 4:
             sys.exit(1)
         else:
             print("Your choice was invalid, please try again")
